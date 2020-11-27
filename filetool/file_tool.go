@@ -3,6 +3,7 @@ package filetool
 import (
 	"io/ioutil"
 	"os"
+	"strings"
 )
 
 func ReadFileToString(file string) (string, error) {
@@ -43,4 +44,13 @@ func GetAllFileInFolder(rootFolder string) []string {
 		}
 	}
 	return paths
+}
+
+// 將檔案的每一行字串拆成 []string
+func TransferFileContentToSlice(fileName string) ([]string, error) {
+	content, err := ReadFileToString(fileName)
+	if err != nil {
+		return []string{}, err
+	}
+	return strings.Split(content, "\n"), nil
 }
